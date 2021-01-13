@@ -12,8 +12,8 @@ const User = require("./models/User");
 /**
  * Controllers (route handlers).
  */
-const tasterController = require("./controllers/taster");
-const tastingController = require("./controllers/tasting");
+const tasterController = require("./controllers/weekly");
+const tastingController = require("./controllers/daily");
 const homeController = require("./controllers/home");
 const userController = require("./controllers/user");
 
@@ -78,25 +78,25 @@ app.get("/logout", async (req, res) => {
   res.redirect('/');
 })
 
-app.get("/create-taster", authMiddleware, (req, res) => {
-  res.render("create-taster", { errors: {} });
+app.get("/add-task", authMiddleware, (req, res) => {
+  res.render("add-task", { errors: {} });
 });
 
-app.post("/create-taster", tasterController.create);
+app.post("/weekly", tasterController.create);
 
-app.get("/tasters", tasterController.list);
-app.get("/tasters/delete/:id", tasterController.delete);
-app.get("/tasters/update/:id", tasterController.edit);
-app.post("/tasters/update/:id", tasterController.update);
+app.get("/weekly", tasterController.list);
+app.get("/weekly/delete/:id", tasterController.delete);
+app.get("/weekly/update/:id", tasterController.edit);
+app.post("/weekly/update/:id", tasterController.update);
 
 
-app.get("/create-tasting", tastingController.createView);
-app.post("/create-tasting", tastingController.create);
+app.get("/thoughts", tastingController.createView);
+app.post("/thoughts", tastingController.create);
 app.get("/update-tasting/:id", tastingController.edit);
 
 
-app.get("/tastings", tastingController.list);
-app.get("/tastings/delete/:id", tastingController.delete);
+app.get("/daily", tastingController.list);
+app.get("/daily/delete/:id", tastingController.delete);
 
 app.get("/join", (req, res) => {
   res.render('create-user', { errors: {} })

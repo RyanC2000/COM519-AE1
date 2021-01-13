@@ -1,0 +1,12 @@
+.container {
+    background-color: rgb(56, 67, 83) !important;
+    color: white !important;
+  }
+
+  .btn {
+    background-color: red !important;
+  }
+
+  .table {
+    color: white !important;
+  }

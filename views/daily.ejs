@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <title> Focus </title>
+
+  <link href="../public/album.css" rel="stylesheet" />
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/" />
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+
+</head>
+
+<style>
+  body {
+    background-color: rgb(53, 53, 53);
+  }
+
+  .container {
+    background-color: rgb(56, 67, 83);
+    color: white !important;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .btn {
+    background-color: rgb(25, 211, 170);
+    color: white;
+    border: none;
+    margin: 2px;
+  }
+
+  .table {
+    color: white !important;
+  }
+
+  #footer {
+    background-color: rgb(21, 31, 46) !important;
+    color: white !important;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+
+  h1 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+
+  .btn-danger {
+    background-color: rgb(235, 92, 92) !important;
+  }
+</style>
+
+
+<body>
+  <main role="main">
+    <%- include('common/header'); -%>
+      <div class="container min-vh-100">
+
+        <% if (message) { %>
+          <div class="row justify-content-md-center">
+            <div class="alert alert-primary" role="alert">
+              <%= message %>
+            </div>
+          </div>
+
+          <% } %>
+
+            <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
+
+
+              <h1 class="mx-auto"> Daily Tasks </h1>
+
+
+
+              <table class="table table-striped custab">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Points</th>
+
+                  </tr>
+
+                  <% tastings.forEach(taste=> {
+
+                    %>
+
+                    <tr>
+                      <td>
+                        <%= taste.title %>
+                      </td>
+                      <td>
+                        <%= taste.description %>
+                      </td>
+                      <td>
+                        <%= taste.price %>
+                      </td>
+                      <td>
+                        <%= taste.points %>
+                      </td>
+                      <td class="text-center"><a class='btn btn-xs'><span class="glyphicon glyphicon-edit"></span>
+                          Edit</a>
+                        <a href="/tastings/delete/<%= taste.id %>" class="btn btn-danger btn-xs"><span
+                            class="glyphicon glyphicon-remove"></span> Del</a>
+                      </td>
+                    </tr>
+
+                    <% }); %>
+
+                </thead>
+
+              </table>
+            </div>
+            <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
+  </main>
+  <%- include('common/footer') -%>
+</body>
+
+</html>

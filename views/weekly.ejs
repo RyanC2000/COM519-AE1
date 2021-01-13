@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <title> Focus </title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/" />
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+
+  <link href="../public/album.css" rel="stylesheet" />
+
+</head>
+
+<style>
+  body {
+    background-color: rgb(53, 53, 53);
+  }
+
+  .container {
+    background-color: rgb(56, 67, 83);
+    color: white !important;
+    overflow: hidden;
+    padding: 0;
+    min-height: 100%;
+  }
+
+  .btn {
+    background-color: rgb(25, 211, 170);
+    color: white;
+    border: none;
+    margin: 2px;
+  }
+
+  .table {
+    color: white !important;
+  }
+
+  #footer {
+    background-color: rgb(21, 31, 46) !important;
+    color: white !important;
+    padding-top: 2%;
+    padding-bottom: 2%;
+  }
+
+  h1 {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    text-align: center;
+  }
+
+  .btn-danger {
+    background-color: rgb(235, 92, 92) !important;
+  }
+
+</style>
+
+<body>
+  <main role="main">
+  <%- include('common/header'); -%>
+  <div class="container min-vh-100">
+
+      <% if (message) { %>
+        <div class="row justify-content-md-center">
+          <div class="alert alert-primary" role="alert">
+            <%= message %>
+          </div>
+        </div>
+
+        <% } %>
+
+        
+          <div class="col-md-12 col-md-offset-2  justify-content-center">
+            <h1 class="mx-auto"> Weekly Tasks </h1>
+
+          </div>
+
+          <div class="col-md-12 col-md-offset-2">
+
+            <table class="table table-striped custab">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Twitter</th>
+                  <th>Tastings#</th>
+
+                </tr>
+
+                <% tasters.forEach(taster=> {
+
+                  %>
+
+                  <tr>
+                    <td>
+                      <%= taster._id %>
+                    </td>
+                    <td>
+                      <%= taster.name %>
+                    </td>
+                    <td>
+                      <%= (taster.twitter || "-" ) %>
+                    </td>
+                    <td>
+                      <%= taster.tastings %>
+                    </td>
+
+                    <td class="text-center"><a class='btn btn-info btn-xs' href="/tasters/update/<%= taster.id %>"><span
+                          class="glyphicon glyphicon-edit"></span> Edit</a>
+                      <a href="/tasters/delete/<%= taster.id %>" class="btn btn-danger btn-xs"><span
+                          class="glyphicon glyphicon-remove"></span> Del</a>
+                    </td>
+
+                  </tr>
+
+                  <% }); %>
+
+
+
+              </thead>
+
+            </table>
+
+
+          </div>
+        </main>
+
+          <%- include('common/footer') -%>
+</body>
+
+</html>
