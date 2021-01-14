@@ -3,7 +3,7 @@ const Thought = require("../models/Thought");
 // CREATE
 exports.create = async (req, res) => {   
   console.log(req);
-  let thought = new Thought({ text: req.body.thought, user_id: req.body.user_id}); 
+  let thought = new Thought({ text: req.body.thought, user_id: req.session.userID}); 
   try {
    await thought.save();
    res.redirect('/thoughts/?message=Thought has been created. ')
@@ -18,7 +18,7 @@ exports.list = async (req, res) => {
   try {
     console.log(req.query);
     const message = req.query.message;
-    const thoughts = await Thought.find({});
+    const thoughts = await Thought.find({ "user_id" : req.session.userID});
     res.render('thoughts', { thoughts: thoughts, message: message });
   } catch (e) {
     res.status(404).send({ message: "Could not list thoughts. " });

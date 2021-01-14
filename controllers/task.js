@@ -4,7 +4,7 @@ const moment = require("moment");
 // CREATE
 exports.create = async (req, res) => {
   console.log(req);
-  let task = new Task({ text: req.body.task_description, deadline: req.body.deadline, user_id: req.body.user_id });
+  let task = new Task({ text: req.body.task_description, deadline: req.body.deadline, user_id: req.session.userID });
   try {
     await task.save();
     res.redirect('/add-task/?message=Task has been created. ')
@@ -24,7 +24,7 @@ exports.listDaily = async (req, res) => {
     var endOfToday = moment().endOf('day').toDate();
     //console.log(startOfToday);
     //console.log(endOfToday);
-    const tasks = await Task.find({ "deadline": { $gte: startOfToday, $lte: endOfToday } });
+    const tasks = await Task.find( {$and: [ { "deadline": { $gte: startOfToday, $lte: endOfToday }}, { "user_id" : req.session.userID} ]});
     res.render('daily', { tasks: tasks, message: message });
   } catch (e) {
     res.status(404).send({ message: "Could not list tasks. " });
@@ -39,7 +39,7 @@ exports.listWeekly = async (req, res) => {
     //console.log(startOfWeek);
     //console.log(endOfWeek);
     const message = req.query.message;
-    const tasks = await Task.find({ "deadline": { $gte: startOfWeek, $lte: endOfWeek } });
+    const tasks = await Task.find( {$and: [{ "deadline": { $gte: startOfWeek, $lte: endOfWeek } }, { "user_id" : req.session.userID}]});
     res.render('weekly', { tasks: tasks, message: message });
   } catch (e) {
     res.status(404).send({ message: "Could not list tasks. " });

@@ -1,32 +1,31 @@
 <style>
-.navbar {
-  background-color:  rgb(21, 31, 46);
-}
+  .navbar {
+    background-color: rgb(21, 31, 46);
+  }
 
-.nav-link {
-  color: white !important;
-}
+  .nav-link {
+    color: white !important;
+  }
 
-.navbar-brand {
-  font-weight: bold !important;
-  color:  rgb(23,211,170) !important;
-}
+  .navbar-brand {
+    font-weight: bold !important;
+    color: rgb(23, 211, 170) !important;
+  }
 
-.nav-link:hover {
-  color:  rgb(23,211,170) !important;
-}
+  .nav-link:hover {
+    color: rgb(23, 211, 170) !important;
+  }
 
-.btn {
+  .btn {
     background-color: rgb(25, 211, 170);
     color: white;
     border: none;
     margin: 2px;
   }
-
 </style>
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light" >
+  <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/"> Focus </a>
     <div class="navbar">
       <div class="navbar-nav">
@@ -34,18 +33,20 @@
           Dashboard <span class="sr-only">(current)</span>
         </a>
 
-        <a class="nav-link" href="weekly"> Weekly </a>
-        <a class="nav-link" href="daily"> Daily </a>
-
         <% if(user) { %>
-        <a class="nav-link" href="thoughts"> Thoughts </a>
-        <a role="button" class="btn btn-primary btn-xs" href="/add-task"> Add Task</a> 
-        <a class="nav-link" href="logout"> <%= user.email %> (Logout) </a> 
-        <%
-        }%> <% if(!user) { %>
-        <a class="nav-link" href="login"> Login </a>
-        <a class="nav-link" href="join"> Register </a>
-        <% } %>
+          <a class="nav-link" href="weekly"> Weekly </a>
+          <a class="nav-link" href="daily"> Daily </a>
+          <a class="nav-link" href="thoughts"> Thoughts </a>
+          <a role="button" class="btn btn-primary btn-xs" href="/add-task"> Add Task</a>
+          <a class="nav-link" href="logout">
+            <%= user.email %> (Logout)
+          </a>
+          <% }%>
+
+            <% if(!user) { %>
+              <a class="nav-link" href="login"> Login </a>
+              <a class="nav-link" href="join"> Register </a>
+              <% } %>
 
       </div>
     </div>
