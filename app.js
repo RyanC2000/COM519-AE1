@@ -78,7 +78,7 @@ app.post("/weekly/edit-task/:id", taskController.updateWeekly);
 
 app.get("/daily/delete/:id", taskController.deleteDaily);
 
-app.get("/weekly/delete/:id", taskController.deleteDaily);
+app.get("/weekly/delete/:id", taskController.deleteWeekly);
 
 // Thought handling. 
 app.get("/thoughts", thoughtController.list);

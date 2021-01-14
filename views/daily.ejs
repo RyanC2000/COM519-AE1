@@ -54,14 +54,25 @@
 
   .btn-danger {
     background-color:
-     rgb(235, 92, 92) !important;
+      rgb(235, 92, 92) !important;
   }
 
-#actionHeader {
-  text-align: center;
-}
-
+  #actionHeader {
+    text-align: center;
+  }
 </style>
+
+<script>
+  function updateState() {
+    var checkBox = document.getElementById("status");
+    if (checkBox.checked == true) {
+      alert("checked");
+
+    } else { alert("unchecked"); }
+  }
+
+
+</script>
 
 <body>
   <main role="main">
@@ -83,12 +94,20 @@
                 <thead>
                   <tr>
                     <th>Task</th>
+                    <th>Status</th>
                     <th id="actionHeader">Actions</th>
                   </tr>
                   <% tasks.forEach(task=> {%>
                     <tr>
                       <td>
                         <%= task.text %>
+                      </td>
+                      <td>
+                        <% if(!task.deadline) { %>
+                          <input type="checkbox" id="complete" onclick="updateState(this)" name="complete">
+                          <% } else { %>
+                            <input type="checkbox" id="status" name="status" onclick="updateState(this)" checked>
+                            <% }%>
                       </td>
                       <td class="text-center"><a class='btn btn-info btn-xs'
                           href="/daily/edit-task/<%= task.id %>"><span class="glyphicon glyphicon-edit"></span>

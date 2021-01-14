@@ -1,17 +1,18 @@
 const Task = require("../models/Task");
+const moment = require("moment");
 
 // CREATE
-exports.create = async (req, res) => {   
+exports.create = async (req, res) => {
   console.log(req);
-  let task = new Task({ text: req.body.task_description, deadline: req.body.deadline, user_id: req.body.user_id}); 
+  let task = new Task({ text: req.body.task_description, deadline: req.body.deadline, user_id: req.body.user_id });
   try {
-   await task.save();
-   res.redirect('/add-task/?message=Task has been created. ')
- } catch (e) {
-   return res.status(400).send({
-     message: JSON.parse(e),
-   });  
- }
+    await task.save();
+    res.redirect('/add-task/?message=Task has been created. ')
+  } catch (e) {
+    return res.status(400).send({
+      message: JSON.parse(e),
+    });
+  }
 }
 
 // RETRIEVE 
@@ -19,7 +20,11 @@ exports.listDaily = async (req, res) => {
   try {
     console.log(req.query);
     const message = req.query.message;
-    const tasks = await Task.find({});
+    var startOfToday = moment().startOf('day').toDate();
+    var endOfToday = moment().endOf('day').toDate();
+    //console.log(startOfToday);
+    //console.log(endOfToday);
+    const tasks = await Task.find({ "deadline": { $gte: startOfToday, $lte: endOfToday } });
     res.render('daily', { tasks: tasks, message: message });
   } catch (e) {
     res.status(404).send({ message: "Could not list tasks. " });
@@ -29,8 +34,12 @@ exports.listDaily = async (req, res) => {
 exports.listWeekly = async (req, res) => {
   try {
     console.log(req.query);
+    var startOfWeek = moment().startOf('isoWeek').toDate();
+    var endOfWeek = moment().endOf('isoWeek').toDate();
+    //console.log(startOfWeek);
+    //console.log(endOfWeek);
     const message = req.query.message;
-    const tasks = await Task.find({});
+    const tasks = await Task.find({ "deadline": { $gte: startOfWeek, $lte: endOfWeek } });
     res.render('weekly', { tasks: tasks, message: message });
   } catch (e) {
     res.status(404).send({ message: "Could not list tasks. " });
