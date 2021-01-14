@@ -5,7 +5,7 @@ exports.login = async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) {
-            res.render('login-user', { errors: { email: { message: 'email not found' } } })
+            res.render('login-user', { errors: { email: { message: 'Your email address is incorrect. Please enter a valid email address.' } } })
             return;
         }
 
@@ -17,7 +17,7 @@ exports.login = async (req, res) => {
             return
         }
 
-        res.render('login-user', { errors: { password: { message: 'password does not match' } } })
+        res.render('login-user', { errors: { password: { message: 'Your password is incorrect. Please enter a valid password.' } } })
 
 
     } catch (e) {
@@ -32,7 +32,7 @@ exports.create = async (req, res) => {
 
         const user = new User({ email: req.body.email, password: req.body.password });
         await user.save();
-        res.redirect('/?message=user saved')
+        res.redirect('/?message= User has been successfully created and saved. ')
     } catch (e) {
         if (e.errors) {
             console.log(e.errors);

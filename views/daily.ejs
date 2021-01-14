@@ -53,10 +53,15 @@
   }
 
   .btn-danger {
-    background-color: rgb(235, 92, 92) !important;
+    background-color:
+     rgb(235, 92, 92) !important;
   }
-</style>
 
+#actionHeader {
+  text-align: center;
+}
+
+</style>
 
 <body>
   <main role="main">
@@ -73,50 +78,27 @@
           <% } %>
 
             <div class="row col-md-12 col-md-offset-2 custyle mx-auto">
-
-
               <h1 class="mx-auto"> Daily Tasks </h1>
-
-
-
               <table class="table table-striped custab">
                 <thead>
                   <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Points</th>
-
+                    <th>Task</th>
+                    <th id="actionHeader">Actions</th>
                   </tr>
-
-                  <% tastings.forEach(taste=> {
-
-                    %>
-
+                  <% tasks.forEach(task=> {%>
                     <tr>
                       <td>
-                        <%= taste.title %>
+                        <%= task.text %>
                       </td>
-                      <td>
-                        <%= taste.description %>
-                      </td>
-                      <td>
-                        <%= taste.price %>
-                      </td>
-                      <td>
-                        <%= taste.points %>
-                      </td>
-                      <td class="text-center"><a class='btn btn-xs'><span class="glyphicon glyphicon-edit"></span>
+                      <td class="text-center"><a class='btn btn-info btn-xs'
+                          href="/daily/edit-task/<%= task.id %>"><span class="glyphicon glyphicon-edit"></span>
                           Edit</a>
-                        <a href="/tastings/delete/<%= taste.id %>" class="btn btn-danger btn-xs"><span
+                        <a href="/daily/delete/<%= task.id %>" class="btn btn-danger btn-xs"><span
                             class="glyphicon glyphicon-remove"></span> Del</a>
                       </td>
                     </tr>
-
                     <% }); %>
-
                 </thead>
-
               </table>
             </div>
             <div class="row col-md-12 col-md-offset-2 custyle mx-auto">

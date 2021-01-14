@@ -59,44 +59,36 @@
 </style>
 
 <body>
+
   <%- include('common/header'); -%>
-
-
 
     <div class="container min-vh-100">
       <h1 class="text-center"> Add Task </h1>
       <div class="row justify-content-md-center">
         <div class="col-">
-          <form method="POST" action="/create-taster">
-            <div class="form-group">
-              <label for="name">Taster Name</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Enter Name" />
 
+          <form method="POST" action="/add-task">
+
+            <div class="form-group">
+              <label for="task_description"> Task Description</label>
+              <input type="text" class="form-control" id="task_description" name="task_description" placeholder="Describe the task" />
+              <label for="task_description"> Deadline</label>
+              <input type="date" class="form-control" id="deadline" name="deadline"/>
+              <input type="hidden" class="form-control" id="user_id" name="user_id" value="<%= user.email %>"/>
               <% if (errors['name']) { %>
                 <p style="color: red">
                   <%= errors['name'].message %>
                 </p>
                 <% } %>
             </div>
-            <div class="form-group">
-              <label for="name">Twitter Handle</label>
-              <input type="text" class="form-control" id="twitter" name="twitter" />
-              <% if (errors['twitter']) { %>
-                <p style="color: red">
-                  <%= errors['twitter'].message %>
-                </p>
-                <% } %>
-            </div>
 
+            <button type="submit" class="btn btn-primary"> Add Task </button>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
       </div>
     </div>
     <%- include('common/footer'); -%>
 </body>
-
-</html>
 
 </html>

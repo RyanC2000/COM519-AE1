@@ -58,79 +58,67 @@
     background-color: rgb(235, 92, 92) !important;
   }
 
+  #actionHeader {
+    text-align: center;
+  }
 </style>
 
 <body>
   <main role="main">
-  <%- include('common/header'); -%>
-  <div class="container min-vh-100">
+    <%- include('common/header'); -%>
+      <div class="container min-vh-100">
 
-      <% if (message) { %>
-        <div class="row justify-content-md-center">
-          <div class="alert alert-primary" role="alert">
-            <%= message %>
-          </div>
-        </div>
-
-        <% } %>
-
-        
-          <div class="col-md-12 col-md-offset-2  justify-content-center">
-            <h1 class="mx-auto"> Weekly Tasks </h1>
-
+        <% if (message) { %>
+          <div class="row justify-content-md-center">
+            <div class="alert alert-primary" role="alert">
+              <%= message %>
+            </div>
           </div>
 
-          <div class="col-md-12 col-md-offset-2">
+          <% } %>
 
-            <table class="table table-striped custab">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Twitter</th>
-                  <th>Tastings#</th>
 
-                </tr>
+            <div class="col-md-12 col-md-offset-2  justify-content-center">
+              <h1 class="mx-auto"> Weekly Tasks </h1>
 
-                <% tasters.forEach(taster=> {
+            </div>
 
-                  %>
+            <div class="col-md-12 col-md-offset-2">
 
+              <table class="table table-striped custab">
+                <thead>
                   <tr>
-                    <td>
-                      <%= taster._id %>
-                    </td>
-                    <td>
-                      <%= taster.name %>
-                    </td>
-                    <td>
-                      <%= (taster.twitter || "-" ) %>
-                    </td>
-                    <td>
-                      <%= taster.tastings %>
-                    </td>
-
-                    <td class="text-center"><a class='btn btn-info btn-xs' href="/tasters/update/<%= taster.id %>"><span
-                          class="glyphicon glyphicon-edit"></span> Edit</a>
-                      <a href="/tasters/delete/<%= taster.id %>" class="btn btn-danger btn-xs"><span
-                          class="glyphicon glyphicon-remove"></span> Del</a>
-                    </td>
-
+                    <th>Task</th>
+                    <th>Date Due</th>
+                    <th id="actionHeader">Actions</th>
                   </tr>
 
-                  <% }); %>
+                  <% tasks.forEach(task=> {
 
+                    %>
 
+                    <tr>
+                      <td>
+                        <%= task.text %>
+                      </td>
+                      <td>
+                        <%= task.deadline %>
+                      </td>
+                      <td class="text-center"><a class='btn btn-info btn-xs' href="/weekly/edit-task/<%= task.id %>"><span
+                            class="glyphicon glyphicon-edit"></span>
+                          Edit</a>
+                        <a href="/weekly/delete/<%= task.id %>" class="btn btn-danger btn-xs"><span
+                            class="glyphicon glyphicon-remove"></span> Del</a>
+                      </td>
+                    </tr>
 
-              </thead>
+                    <% }); %>
+                </thead>
+              </table>
 
-            </table>
-
-
-          </div>
-        </main>
-
-          <%- include('common/footer') -%>
+            </div>
+  </main>
+  <%- include('common/footer') -%>
 </body>
 
 </html>
