@@ -57,68 +57,61 @@
   .btn-danger {
     background-color: rgb(235, 92, 92) !important;
   }
+
+#thought {
+  width: 90%;
+  margin-left: 5%;
+}
+
+#add_thought {
+  margin-left: 5%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
 </style>
 
 <body>
   <%- include('common/header'); -%>
 
-  <div class="container min-vh-100">
-      <h1 class="text-center"> Add a Thought </h1>
+    <div class="container min-vh-100">
+      <h1 class="text-center"> Thoughts </h1>
+
+      <form method="POST" action="/add-thought">
+          <input type="text" class="form-control" id="thought" name="thought"
+            placeholder="What's on your mind?" />
+          <input type="hidden" id="date" name="date" value="CurrentDate">
+          <input type="hidden" class="form-control" id="user_id" name="user_id" value="<%= user.email %>" />
+          <button type="submit" id="add_thought" class="btn btn-primary"> Save Thought </button>
+      </form>
+
       <div class="row justify-content-md-center">
         <div class="col-">
-          <form method="POST" action="/create-tasting">
-            <div class="form-group">
-              <label for="name">Wine Title </label>
-              <input type="text" class="form-control" id="name" name="title" placeholder="Enter Title" />
-
-              <% if (errors['title']) { %>
-                <p style="color: red">
-                  <%= errors['title'].message %>
-                </p>
-                <% } %>
-            </div>
-
-            <div class="form-group">
-              <label for="name">Points</label>
-              <input type="number" class="form-control" id="name" name="points" />
-
-              <% if (errors['points']) { %>
-                <p style="color: red">
-                  <%= errors['points'].message %>
-                </p>
-                <% } %>
-            </div>
-
-            <div class="form-group">
-              <label for="exampleFormControlSelect1">Select Taster</label>
-              <select class="form-control" name="taster_id" id="exampleFormControlSelect1">
-                <% tasters.forEach( taster=> { %>
-
-                  <option value="<%= taster._id %>">
-                    <%= taster.name %>
-                  </option>
-
-                  <% }) %>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <% regions.forEach( region=> { %>
-                <div class="form-check form-check-inline">
-                  <input name="regions" class="form-check-input" type="checkbox" id="inlineCheckbox2"
-                    value=<%=region._id %>
-                  />
-                  <label class="form-check-label" for="inlineCheckbox2">
-                    <%= region.name %>
-                  </label>
-                </div>
-
-                <% }) %>
-            </div>
-
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
+          <table class="table table-striped custab">
+            <thead>
+              <tr>
+                <th> Thought </th>
+                <th> Date </th>
+                <th id="actionHeader">Actions</th>
+              </tr>
+              <% thoughts.forEach(thought=> {%>
+                <tr>
+                  <td>
+                    <%= thought.text %>
+                  </td>
+                  <td>
+                    <%= thought.user_id %>
+                  </td>
+                  <td class="text-center"><a class='btn btn-info btn-xs'
+                      href="/thoughts/edit-thought/<%= thought.id %>"><span class="glyphicon glyphicon-edit"></span>
+                      Edit</a>
+                    <a href="/thoughts/delete/<%= thought.id %>" class="btn btn-danger btn-xs"><span
+                        class="glyphicon glyphicon-remove"></span> Del</a>
+                  </td>
+                </tr>
+                <% }); %>
+            </thead>
+          </table>
         </div>
       </div>
     </div>

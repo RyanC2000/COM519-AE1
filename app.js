@@ -83,6 +83,14 @@ app.get("/weekly/delete/:id", taskController.deleteDaily);
 // Thought handling. 
 app.get("/thoughts", thoughtController.list);
 
+app.get("/thoughts/delete/:id", thoughtController.delete);
+
+app.get("/thoughts/edit-thought/:id", thoughtController.edit);
+
+app.post("/thoughts/edit-thought/:id", thoughtController.update);
+
+app.post("/add-thought", thoughtController.create);
+
 // User login/sign-up functions. 
 app.get("/logout", async (req, res) => {
   req.session.destroy();
