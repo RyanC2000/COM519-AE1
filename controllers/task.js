@@ -9,11 +9,11 @@ exports.create = async (req, res) => {
     await task.save();
     res.redirect('/add-task/?message=Task has been created. ')
   } catch (e) {
-    return res.status(400).send({
-      message: JSON.parse(e),
-    });
+    console.log(e.errors);
+    res.render('add-task', { errors: e.errors })
+    return;
+    };
   }
-}
 
 // RETRIEVE 
 exports.listDaily = async (req, res) => {

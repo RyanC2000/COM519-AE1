@@ -8,11 +8,12 @@ exports.create = async (req, res) => {
    await thought.save();
    res.redirect('/thoughts/?message=Thought has been created. ')
  } catch (e) {
-   return res.status(400).send({
-     message: JSON.parse(e),
-   });  
- }
+  console.log(e.errors);
+  res.render('thoughts', { errors: e.errors })
+  return;
+  };
 }
+
 // RETRIEVE 
 exports.list = async (req, res) => {
   try {

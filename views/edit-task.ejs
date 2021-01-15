@@ -28,17 +28,26 @@
               <label for="name"> Task Description </label>
               <input value="<%= task.text %>" type="text" class="form-control" id="text" name="text"
                 placeholder="Describe the task" />
-
-              <label for="task_description"> Deadline</label>
-              <input value="<%= task.deadline %>" type="date" class="form-control" id="deadline" name="deadline" />
-              <input type="hidden" class="form-control" id="user_id" name="user_id" value="<%= user.email %>" />
-
+              <% if (errors['text']) { %>
+                <p style="color: red">
+                  <%= errors['text'].message %>
+                </p>
+                <% } %>
             </div>
 
-            <button type="submit" class="btn btn-primary"> Update Task </button>
-          </form>
+            <label for="task_description"> Deadline</label>
+            <input value="<%= task.deadline %>" type="date" class="form-control" id="deadline" name="deadline" />
+            <% if (errors['deadline']) { %>
+              <p style="color: red">
+                <%= errors['deadline'].message %>
+              </p>
+              <% } %>
         </div>
+
+        <button type="submit" class="btn btn-primary"> Update Task </button>
+        </form>
       </div>
+    </div>
     </div>
     <%- include('common/footer'); -%>
 </body>
