@@ -1,9 +1,8 @@
-# Database Starter Project 
-https://radiant-sea-31647.herokuapp.com/ 
-## Getting Started
+# Focus Database Project
+https://obscure-gorge-73341.herokuapp.com/
+## Running Locally
 
-- Clone this repo 
-- Install the dependencies -  `npm install`
-- Rename .env.example to .env. You won't normally need to change the values in this file.
-- If this is your first time getting started then run the seeder - `node seeder`
+- Download this repository to your local machine. 
+- Open the folder in Visual Studio Code. 
+- Install the project dependencies by running the following command in a VSCode terminal -  `npm install`. 
 - Run the project in development mode - `npm run dev`
