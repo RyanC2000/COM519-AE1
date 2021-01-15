@@ -10,7 +10,7 @@ const loading = require("loading-cli");
  */
 // const uri = "mongodb://localhost:27017/focus";
 const uri = "mongodb+srv://admin:hkHg9xpbAg2cNY4@cluster0.kh98s.mongodb.net/focus?retryWrites=true&w=majority"
-const client = new MongoClient(uri);
+const client = new MongoClient(uri, { useNewUrlParser: true });
 
 async function main() {
   try {
@@ -25,7 +25,6 @@ async function main() {
     }
 
     load.stop();
-
 
     process.exit();
   } catch (error) {
