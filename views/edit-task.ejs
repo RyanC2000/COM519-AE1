@@ -35,19 +35,20 @@
                 <% } %>
             </div>
 
-            <label for="task_description"> Deadline</label>
-            <input value="<%= task.deadline %>" type="date" class="form-control" id="deadline" name="deadline" />
-            <% if (errors['deadline']) { %>
-              <p style="color: red">
-                <%= errors['deadline'].message %>
-              </p>
-              <% } %>
-        </div>
+            <div class="form-group">
+              <label for="task_description"> Deadline</label>
+              <input value="<%= task.deadline %>" type="date" class="form-control" id="deadline" name="deadline" />
+              <% if (errors['deadline']) { %>
+                <p style="color: red">
+                  <%= errors['deadline'].message %>
+                </p>
+                <% } %>
+            </div>
 
-        <button type="submit" class="btn btn-primary"> Update Task </button>
-        </form>
+            <button type="submit" class="btn btn-primary"> Update Task </button>
+          </form>
+        </div>
       </div>
-    </div>
     </div>
     <%- include('common/footer'); -%>
 </body>

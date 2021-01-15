@@ -6,7 +6,7 @@ exports.create = async (req, res) => {
   let thought = new Thought({ text: req.body.thought, user_id: req.session.userID}); 
   try {
    await thought.save();
-   res.redirect('/thoughts/?message=Thought has been created. ')
+   res.redirect('thoughts')
  } catch (e) {
   console.log(e.errors);
   res.render('thoughts', { errors: e.errors })
@@ -52,7 +52,7 @@ exports.update = async (req, res) => {
   const id = req.params.id;
   try {
     const thought = await Thought.updateOne({ _id: id }, req.body);
-    res.redirect('/thoughts/?message= Thought has been updated. ');
+    res.redirect('../../thoughts');
   } catch (e) {
     res.status(404).send({
       message: `Could not find thought ${id}.`,

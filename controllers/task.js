@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
   let task = new Task({ text: req.body.task_description, deadline: req.body.deadline, user_id: req.session.userID });
   try {
     await task.save();
-    res.redirect('/add-task/?message=Task has been created. ')
+    res.redirect('add-task')
   } catch (e) {
     console.log(e.errors);
     res.render('add-task', { errors: e.errors })
